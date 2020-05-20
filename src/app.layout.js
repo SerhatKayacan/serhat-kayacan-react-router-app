@@ -1,70 +1,60 @@
 import React from "react";
 import auth from "./auth";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Movies from "./movies-components/Movies";
+import App from "./todos/app";
 
 export const AppLayout = (props) => {
   return (
-    <Router>
-      <div>
-        <ul>
-          <li>
-            <Link to="/app">Home</Link>
-          </li>
-          <li>
-            <Link to="/app/about">About</Link>
-          </li>
-          <li>
-            <Link to="/app/dashboard">Dashboard</Link>
-          </li>
-        </ul>
+    <div className="container">
+      <Router>
         <div>
-          <h1>App Layout</h1>
-          <button
-            onClick={() => {
-              auth.logout(() => {
-                props.history.push("/");
-              });
-            }}
-          >
-            Logout
-          </button>
+          <ul className="nav">
+            <li className="nav-item mt-2">
+              <Link to="/app">Home</Link>
+            </li>
+            <li className="nav-item mt-2">
+              <Link to="/app/movies">Movies</Link>
+            </li>
+            <li className="nav-item mt-2">
+              <Link to="/app/todos">Todos</Link>
+            </li>
+            <li className="nav-item ml-auto">
+              <a
+                className="nav-link"
+                href=""
+                onClick={() => {
+                  auth.logout(() => {
+                    props.history.push("/");
+                  });
+                }}
+              >
+                {" "}
+                Logout
+              </a>
+            </li>
+          </ul>
+          <hr />
+          <Switch>
+            <Route exact path="/app">
+              <Home />
+            </Route>
+            <Route path="/app/movies">
+              <Movies />
+            </Route>
+            <Route path="/app/todos">
+              <App />
+            </Route>
+          </Switch>
         </div>
-        <hr />
-        <Switch>
-          <Route exact path="/app">
-            <Home />
-          </Route>
-          <Route path="/app/about">
-            <About />
-          </Route>
-          <Route path="/app/dashboard">
-            <Dashboard />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+      </Router>
+    </div>
   );
 };
 function Home() {
   return (
     <div>
       <h2>Home</h2>
-    </div>
-  );
-}
-
-function About() {
-  return (
-    <div>
-      <h2>About</h2>
-    </div>
-  );
-}
-
-function Dashboard() {
-  return (
-    <div>
-      <h2>Dashboard</h2>
     </div>
   );
 }

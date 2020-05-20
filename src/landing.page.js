@@ -5,8 +5,7 @@ export const LandingPage = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   return (
-    <div>
-      <h1>Landing Page</h1>
+    <div className="container mt-5">
       <input
         type="text"
         onChange={(e) => setUsername(e.target.value)}
